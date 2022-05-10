@@ -62,6 +62,8 @@ function Post({ post }: IPost) {
                             serializers={
                                 {
                                     h1: (props: any) => <h1 className="text-2xl font-bold my-3" {...props} />,
+                                    h2: (props: any) => <h2 className="text-xl font-bold my-2" {...props} />,
+                                    h3: (props: any) => <h3 className="text-lg font-bold my-1" {...props} />,
                                     li: ({ children }: any) => <li className="list-disc ml-6">{children}</li>,
                                     blockquote: ({ children }: any) => <div className="font-light italic text-lg bg-slate-100 my-4 p-4 rounded-md border-l-4 border-[#143F6B]"> - {children}</div>,
                                     image: (props: any) => <img className="w-full h-full my-4" src={urlFor(props).url()} />,
