@@ -1,23 +1,39 @@
-# Next.js + Tailwind CSS Example
+# Blog Mine
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+Blog Mine is a webpage to post my blog articles on the Internet. It covers the aspect of SSR and ISR in [NEXT.js](https://nextjs.org/) along with TypeScript and powered by [Sanity](https://www.sanity.io/).
 
-## Deploy your own
+### ▶ Working in Production
+[Blog Mine](https://blog-mine.vercel.app/)
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+### Features
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+- Pre-rendered pages by Next.js which helps for low reload time
+- Comments section to suggest on each blog article
+- Responsive layout 
 
-## How to use
+### Tech Stack
+- [Next.js](https://nextjs.org/) - React Framework for production
+- [Sanity](https://www.sanity.io/) -  A great Content Management System
+- [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS framework
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+### Screenshots
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-# or
-pnpm create next-app -- --example with-tailwindcss with-tailwindcss-app
-```
+- Home Page
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+![image](https://user-images.githubusercontent.com/65642849/167597861-15a0ad3a-5ef2-40bf-9b35-4437b11de0af.png)
+
+- Blog Page
+ 
+![image](https://user-images.githubusercontent.com/65642849/167598389-a4d58921-61da-4ea3-bf19-35058e72368b.png)
+
+- Form Section in each blog for comments
+
+![image](https://user-images.githubusercontent.com/65642849/167598611-ec8093d1-9d4c-457a-bd5a-7db1133f1d6f.png)
+
+- Sanity Studio Blog Deploy
+
+![image](https://user-images.githubusercontent.com/65642849/167598893-93672813-448b-4f99-adb3-d22f0e6c2c3d.png)
+
+### Acknowledgements
+
+- [React-Hook-Form](https://react-hook-form.com/) An easy to use validation forms
