@@ -41,4 +41,4 @@ Blog Mine is a webpage to post my blog articles on the Internet. It covers the a
 - [`react-hook-form`](https://react-hook-form.com/) An easy to use validation forms in React.
 - [`react-portable-text`](https://www.npmjs.com/package/react-portable-text) An easy way to render Portable Text block content in React.
 - [`react-syntax-highlighter`](https://www.npmjs.com/package/react-syntax-highlighter) Syntax Highlighting component to highlight code.
-- [``react-icons```](https://react-icons.github.io/react-icons) Popular Icons to include in React Project.
+- [``react-icons``](https://react-icons.github.io/react-icons) Popular Icons to include in React Project.
