@@ -6,6 +6,8 @@ import { Post } from '../../typing'
 import PortableText from "react-portable-text";
 import { useForm, SubmitHandler } from "react-hook-form"
 import { useState } from "react";
+import SyntaxHighlighter from 'react-syntax-highlighter';
+
 
 interface IFormInput {
     _id: string;
@@ -18,6 +20,7 @@ interface IPost {
     post: Post
 }
 function Post({ post }: IPost) {
+
     const [submit, setSubmit] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
     const onSubmit: SubmitHandler<IFormInput> = async (data) => {
@@ -34,13 +37,14 @@ function Post({ post }: IPost) {
     }
     return (
         <>
+
             <Head>
                 <title>{post.title}</title>
                 <link rel="icon" href="/cube-solid.ico" />
             </Head>
             <Header />
             <img className="w-full h-40 object-cover" src={urlFor(post.mainImage).url()} alt="post banner" />
-            <main className="max-w-4xl mx-auto ">
+            <main className="max-w-4xl mx-auto text-base">
                 <article className="mb-5 p-5">
                     <h1 className="text-4xl font-bold mt-10 mb-6 text-[#143F6B] ">{post.title}</h1>
                     <h2 className="text-xl font-medium mb-4">{post.description}</h2>
@@ -56,18 +60,21 @@ function Post({ post }: IPost) {
 
                     <div className="mt-10 max-w-full text-justify">
                         <PortableText
+
                             dataset={process.env.NEXT_PUBLIC_SANITY_DATASET!}
                             projectId={process.env.NEXT_PUBLIC_SANITY_PORJECT_ID!}
                             content={post.body}
                             serializers={
                                 {
-                                    h1: (props: any) => <h1 className="text-2xl font-bold my-3" {...props} />,
-                                    h2: (props: any) => <h2 className="text-xl font-bold my-2" {...props} />,
-                                    h3: (props: any) => <h3 className="text-lg font-bold my-1" {...props} />,
+                                    h1: (props: any) => <h1 className="text-3xl font-bold my-8" {...props} />,
+                                    h2: (props: any) => <h2 className="text-2xl font-bold my-6" {...props} />,
+                                    h3: (props: any) => <h3 className="text-xl font-bold my-4" {...props} />,
                                     li: ({ children }: any) => <li className="list-disc ml-6">{children}</li>,
                                     blockquote: ({ children }: any) => <div className="font-light italic text-lg bg-slate-100 my-4 p-4 rounded-md border-l-4 border-[#143F6B]"> - {children}</div>,
                                     image: (props: any) => <img className="w-full h-full my-4" src={urlFor(props).url()} />,
-                                    link: ({ href, children }: any) => <a className="text-blue-900 hover:underline" href={href}>{children}</a>
+                                    link: ({ href, children }: any) => <a className="text-blue-900 hover:underline" href={href}>{children}</a>,
+                                    code: ({ children }: any) => <pre className="text-md rounded-sm px-1 bg-[#d8d8d8]">{children}</pre>,
+                                    customCode: ({ code }: any) => <SyntaxHighlighter language={code.language || "text"} className='bg-[#d8d8d8] hover:bg-opacity-10 rounded-md mt-8 mb-4' >{code.code}</SyntaxHighlighter>
                                 }
                             }
                         />
