@@ -20,6 +20,7 @@ interface IPost {
     post: Post
 }
 function Post({ post }: IPost) {
+    console.log(post.body);
 
     const [submit, setSubmit] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
@@ -66,14 +67,20 @@ function Post({ post }: IPost) {
                             content={post.body}
                             serializers={
                                 {
-                                    h1: (props: any) => <h1 className="text-3xl font-bold my-8" {...props} />,
-                                    h2: (props: any) => <h2 className="text-2xl font-bold my-6" {...props} />,
-                                    h3: (props: any) => <h3 className="text-xl font-bold my-4" {...props} />,
-                                    li: ({ children }: any) => <li className="list-disc ml-6">{children}</li>,
+                                    h1: (props: any) => <h1 className="text-4xl font-bold my-8" {...props} />,
+                                    h2: (props: any) => <h2 className="text-3xl font-bold my-6" {...props} />,
+                                    h3: (props: any) => <h3 className="text-2xl font-bold my-6" {...props} />,
+                                    h4: (props: any) => <h3 className="text-xl font-bold my-4" {...props} />,
+                                    h5: (props: any) => <h3 className="text-lg font-bold my-2" {...props} />,
+                                    h6: (props: any) => <h3 className="text-base font-bold my-1" {...props} />,
+                                    li: ({ children, _key }: any) => <li key={_key} className="list-disc ml-6">{children}</li>,
                                     blockquote: ({ children }: any) => <div className="font-light italic text-lg bg-slate-100 my-4 p-4 rounded-md border-l-4 border-[#143F6B]"> - {children}</div>,
-                                    image: (props: any) => <img className="w-full h-full my-4" src={urlFor(props).url()} />,
+                                    customImage: ({ asset, alt, reference, _key }: any) => <figure className="flex flex-col">
+                                        <img key={_key} className="select-none w-full h-full mt-6 mb-3" alt={alt} src={urlFor(asset).url()} />
+                                        <figcaption className="my-2 text-xs font-serif mx-auto md:text-sm text-gray-400 justify-center">{reference}</figcaption>
+                                    </figure>,
                                     link: ({ href, children }: any) => <a className="text-blue-900 hover:underline" href={href}>{children}</a>,
-                                    code: ({ children }: any) => <pre className="text-md rounded-sm px-1 bg-[#d8d8d8]">{children}</pre>,
+                                    code: ({ children }: any) => <pre className="rounded-md p-1 bg-[#d8d8d8] inline">{children}</pre>,
                                     customCode: ({ code }: any) => <SyntaxHighlighter language={code.language || "text"} className='bg-[#d8d8d8] hover:bg-opacity-10 rounded-md mt-8 mb-4' >{code.code}</SyntaxHighlighter>
                                 }
                             }

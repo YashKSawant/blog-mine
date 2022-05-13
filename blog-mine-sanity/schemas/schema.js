@@ -11,6 +11,7 @@ import post from './post'
 import author from './author'
 import comment from './comment'
 import customCode from './object/customCode'
+import customImage from './object/customImage'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -28,6 +29,7 @@ export default createSchema({
     // { type: 'typename' } in other document schemas
     blockContent,
     comment,
+    customImage,
     customCode,
   ]),
 })
