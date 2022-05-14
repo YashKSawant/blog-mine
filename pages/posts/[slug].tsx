@@ -6,7 +6,10 @@ import { Post } from '../../typing'
 import PortableText from "react-portable-text";
 import { useForm, SubmitHandler } from "react-hook-form"
 import { useState } from "react";
-import SyntaxHighlighter from 'react-syntax-highlighter';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { FaRegCopy, FaCode } from 'react-icons/fa'
+import { atomDark, prism } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 
 interface IFormInput {
@@ -20,6 +23,8 @@ interface IPost {
     post: Post
 }
 function Post({ post }: IPost) {
+    console.log(post);
+
     console.log(post.body);
 
     const [submit, setSubmit] = useState(false)
@@ -79,9 +84,18 @@ function Post({ post }: IPost) {
                                         <img key={_key} className="select-none w-full h-full mt-6 mb-3" alt={alt} src={urlFor(asset).url()} />
                                         <figcaption className="my-2 text-xs font-serif mx-auto md:text-sm text-gray-400 justify-center">{reference}</figcaption>
                                     </figure>,
-                                    link: ({ href, children }: any) => <a className="text-blue-900 hover:underline" href={href}>{children}</a>,
+                                    link: ({ href, children }: any) => <a className="text-blue-700 hover:underline" href={href}>{children}</a>,
                                     code: ({ children }: any) => <pre className="rounded-md p-1 bg-[#d8d8d8] inline">{children}</pre>,
-                                    customCode: ({ code }: any) => <SyntaxHighlighter language={code.language || "text"} className='bg-[#d8d8d8] hover:bg-opacity-10 rounded-md mt-8 mb-4' >{code.code}</SyntaxHighlighter>
+                                    customCode: ({ code }: any) => <div className="mt-8 mb-4">
+                                        <div className="flex justify-between">
+                                            <span className="mb-0 border-x-2 px-3 py-1 bg-[#e6e6e6] ">
+                                                {code.language.toUpperCase()}</span>
+                                            <CopyToClipboard text={code.code}>
+                                                <button className="hover:text-blue-700 transition-all duration-200 ease-in"><FaRegCopy size={20} /></button>
+                                            </CopyToClipboard>
+                                        </div>
+                                        <SyntaxHighlighter language={code.language || "text"} style={prism} className='hover:bg-opacity-10 rounded-md mt-0' >{code.code}</SyntaxHighlighter>
+                                    </div>,
                                 }
                             }
                         />
