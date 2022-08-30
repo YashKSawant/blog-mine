@@ -89,10 +89,10 @@ function Post({ post }: IPost) {
                                             <span className="mb-0 border-x-2 px-3 py-1 rounded-md text-gray-900 bg-[#f5f2f0] ">
                                                 {code.language.toUpperCase()}</span>
                                             <CopyToClipboard text={code.code}>
-                                                <button className="text-gray-700 hover:text-blue-700 absolute top-12 right-2 transition-all duration-200 ease-in"><FaRegCopy size={18} /></button>
+                                                <button className="text-gray-400 hover:text-blue-700 absolute top-12 right-2 transition-all duration-200 ease-in"><FaRegCopy size={18} /></button>
                                             </CopyToClipboard>
                                         </div>
-                                        <SyntaxHighlighter language={code.language || "text"} style={prism} className='hover:bg-opacity-10 rounded-md mt-0' >{code.code}</SyntaxHighlighter>
+                                        <SyntaxHighlighter language={code.language || "text"} style={atomDark} className='hover:bg-opacity-10 rounded-md mt-0' >{code.code}</SyntaxHighlighter>
                                     </div>,
                                 }
                             }
