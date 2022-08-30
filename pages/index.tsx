@@ -14,6 +14,7 @@ interface IPosts {
 
 const Home = ({ posts }: IPosts) => {
   return (
+
     <div>
       <Head>
         <title>Blog Mine</title>
@@ -23,7 +24,6 @@ const Home = ({ posts }: IPosts) => {
       <div className='max-w-7xl mx-auto'>
         <Hero />
         <Posts posts={posts} />
-
       </div>
     </div>
   )

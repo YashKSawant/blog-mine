@@ -23,9 +23,6 @@ interface IPost {
     post: Post
 }
 function Post({ post }: IPost) {
-    console.log(post);
-
-    console.log(post.body);
 
     const [submit, setSubmit] = useState(false)
     const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
@@ -52,11 +49,11 @@ function Post({ post }: IPost) {
             <img className="w-full h-40 object-cover" src={urlFor(post.mainImage).url()} alt="post banner" />
             <main className="max-w-4xl mx-auto text-base">
                 <article className="mb-5 p-5">
-                    <h1 className="text-4xl font-bold mt-10 mb-6 text-[#143F6B] ">{post.title}</h1>
+                    <h1 className="text-4xl font-bold mt-10 mb-6 text-primary ">{post.title}</h1>
                     <h2 className="text-xl font-medium mb-4">{post.description}</h2>
                     <div className="flex items-center space-x-4 mt-3">
-                        <img className="h-12 w-12 rounded-full border-4 border-[#FEB139]" src={urlFor(post.author.image).url()} alt="" />
-                        <p className='font-extralight text-lg '>Posted by <span className="font-semibold text-[#064a8d]">{post.author.name}</span>  - Published at {new Date(post._createdAt).toLocaleString('en-GB', { day: '2-digit', month: 'long', year: 'numeric', weekday: 'long', hour: 'numeric', minute: 'numeric', hour12: true })}</p>
+                        <img className="h-12 w-12 rounded-full border-4 border-secondary" src={urlFor(post.author.image).url()} alt="" />
+                        <p className='font-extralight text-lg '>Posted by <span className="font-semibold text-[#064a8d]">{post.author.name}</span>  - Published at {new Date(post.publishedAt).toLocaleString('en-GB', { day: '2-digit', month: 'long', year: 'numeric', weekday: 'long', hour: 'numeric', minute: 'numeric', hour12: true })}</p>
                     </div>
                     <div className="mt-8">
                         {post.categories.map((category, index) => (
@@ -78,20 +75,21 @@ function Post({ post }: IPost) {
                                     h4: (props: any) => <h3 className="text-xl font-bold my-4" {...props} />,
                                     h5: (props: any) => <h3 className="text-lg font-bold my-2" {...props} />,
                                     h6: (props: any) => <h3 className="text-base font-bold my-1" {...props} />,
+                                    ol: ({ children }: any) => <ol>{children}</ol>,
                                     li: ({ children, _key }: any) => <li key={_key} className="list-disc ml-6">{children}</li>,
-                                    blockquote: ({ children }: any) => <div className="font-light italic text-lg bg-slate-100 my-4 p-4 rounded-md border-l-4 border-[#143F6B]"> - {children}</div>,
+                                    blockquote: ({ children }: any) => <div className="font-light italic text-lg bg-slate-100 my-4 p-4 rounded-md border-l-4 border-primary"> - {children}</div>,
                                     customImage: ({ asset, alt, reference, _key }: any) => <figure className="flex flex-col">
                                         <img key={_key} className="select-none w-full h-full mt-6 mb-3" alt={alt} src={urlFor(asset).url()} />
                                         <figcaption className="my-2 text-xs font-serif mx-auto md:text-sm text-gray-400 justify-center">{reference}</figcaption>
                                     </figure>,
-                                    link: ({ href, children }: any) => <a className="text-blue-700 hover:underline" href={href}>{children}</a>,
+                                    link: ({ href, children }: any) => <a className="text-blue-700 hover:underline" target='_blank' href={href}>{children}</a>,
                                     code: ({ children }: any) => <pre className="rounded-md p-1 bg-[#d8d8d8] inline">{children}</pre>,
-                                    customCode: ({ code }: any) => <div className="mt-8 mb-4">
+                                    customCode: ({ code }: any) => <div className="mt-8 relative mb-4 ">
                                         <div className="flex justify-between">
-                                            <span className="mb-0 border-x-2 px-3 py-1 bg-[#e6e6e6] ">
+                                            <span className="mb-0 border-x-2 px-3 py-1 rounded-md text-gray-900 bg-[#f5f2f0] ">
                                                 {code.language.toUpperCase()}</span>
                                             <CopyToClipboard text={code.code}>
-                                                <button className="hover:text-blue-700 transition-all duration-200 ease-in"><FaRegCopy size={20} /></button>
+                                                <button className="text-gray-700 hover:text-blue-700 absolute top-12 right-2 transition-all duration-200 ease-in"><FaRegCopy size={18} /></button>
                                             </CopyToClipboard>
                                         </div>
                                         <SyntaxHighlighter language={code.language || "text"} style={prism} className='hover:bg-opacity-10 rounded-md mt-0' >{code.code}</SyntaxHighlighter>
@@ -101,28 +99,27 @@ function Post({ post }: IPost) {
                         />
                     </div>
                 </article>
-                <hr className="max-w-lg my-5 mx-auto bg-gradient-to-r from-[#fef739] rounded-2xl to-[#FEB139] h-1 " />
+                <hr className="divider" />
                 {submit ? (
-                    <div className="flex flex-col mx-auto max-w-md lg:max-w-3xl sm:max-w-xl font-bold bg-gradient-to-r from-[#fef739] to-[#FEB139] text-[#143F6B] p-10 my-10 rounded-md">
+                    <div className="submitted-form">
                         <h2 className="text-3xl mb-5">Thank you very much for your suggestion.</h2>
                         <p className="italic text-md">Comment will appear after been approved.</p>
                     </div>
                 ) : (
-                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col p-10 my-10 mx-auto max-w-4xl">
-                        <h1 className="text-3xl mt-10 mb-2 font-bold text-[#143F6B] ">Have some suggestions?</h1>
-                        <h2 className="text-xl mb-3 text-[#ffab23]">Leave a comment down below.</h2>
+                    <form onSubmit={handleSubmit(onSubmit)} id='form'>
+                        <h1>Have some suggestions?</h1>
+                        <h2>Leave a comment down below.</h2>
                         <hr className="mt-2 py-4" />
                         <input type="hidden"{...register("_id")} name="_id" value={post._id} />
                         <label className="block mb-5">
-                            <span className="text-gray-600 text-xl">Name</span>
+                            <span className="text-gray-700 text-xl">Name</span>
                             <input {...register("name", {
                                 required: {
                                     value: true,
                                     message: "Name Field is Required"
                                 },
                             })}
-                                className="form-input shadow-md ring-[#143F6B] ring-1 rounded p-3 mt-1 block
-                         w-full outline-none focus:ring-yellow-400"
+                                className="input-fields form-input"
                                 placeholder="Danish Maxwell"
                                 type="text" />
                             {errors.name?.message && (
@@ -130,7 +127,7 @@ function Post({ post }: IPost) {
                             )}
                         </label>
                         <label className="block mb-5">
-                            <span className="text-gray-600 text-xl">Email</span>
+                            <span className="text-gray-700 text-xl">Email</span>
                             <input {...register("email", {
                                 required: {
                                     value: true,
@@ -142,35 +139,33 @@ function Post({ post }: IPost) {
                                     message: "Invalid email address",
                                 },
                             })}
-                                className="form-input shadow-md ring-[#143F6B] ring-1 rounded p-3 mt-1 block
-                         w-full outline-none focus:ring-yellow-400"
+                                className="input-fields form-input"
                                 placeholder="danishmaxwell69@gmail.com"
                                 type="email" />
                             {errors.email?.message && (
-                                <div className="text-red-600 mt-3 before:translate-y-[-40px] after:translate-y-3 transition-all duration-500"><sup>*</sup> {errors.email?.message}</div>
+                                <div className="text-red-600 mt-3"><sup>*</sup> {errors.email?.message}</div>
                             )}
                         </label>
                         <label className="block mb-5">
-                            <span className="text-gray-600 text-xl">Comment</span>
+                            <span className="text-gray-700 text-xl">Comment</span>
                             <textarea {...register("comment", {
                                 required: {
                                     value: true,
                                     message: "Comment Field is Required"
                                 },
                             })}
-                                className="form-input shadow-md ring-[#143F6B] ring-1 rounded p-3 mt-1 block
-                         w-full outline-none focus:ring-yellow-400"
+                                className="input-fields form-input"
                                 placeholder="This article is sick!"
                                 rows={8}></textarea>
                             {errors.comment?.message && (
                                 <div className="text-red-600 mt-3"><sup>*</sup> {errors.comment?.message}</div>
                             )}
                         </label>
-                        <input type="submit" className="text-[#143F6B] hover:text-white transition-all duration-600 font-bold cursor-pointer bg-gradient-to-r from-[#fef739] rounded-xl to-[#FEB139] h-10" />
+                        <input type="submit" className="btn-submit" />
                     </form>
                 )}
                 {/* Comments */}
-                <section className="text-[#143F6B] flex flex-col p-10 m-10 mx-auto max-w-md lg:max-w-3xl sm:max-w-2xl rounded-md shadow-lg shadow-slate-300 space-y-2">
+                <section id="comments" >
                     <h3 className="text-2xl mb-2 font-bold">Comments</h3>
                     <hr className="mt-2 py-2" />
 

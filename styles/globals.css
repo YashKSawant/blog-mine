@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components{
+    .divider{
+        @apply max-w-lg my-5 mx-auto bg-gradient-to-r from-[#fef739] 
+        rounded-2xl to-secondary h-1
+    }
+    #form{
+        @apply flex flex-col p-10 my-10 mx-auto max-w-4xl
+    }
+    #form h1{
+       @apply text-3xl mt-10 mb-2 font-bold text-primary
+    }
+    #form h2{
+        @apply text-xl mb-3 text-secondary
+    }
+    .submitted-form{
+        @apply flex flex-col mx-auto max-w-md lg:max-w-3xl sm:max-w-xl font-bold bg-gradient-to-r
+         from-[#fef739] to-secondary text-primary p-10 my-10 rounded-md
+    }
+    .input-fields{
+        @apply  shadow-md ring-[#143F6B] ring-1 rounded p-3 mt-1
+        block w-full outline-none focus:ring-yellow-400
+    }
+    .btn-submit{
+        @apply text-primary hover:text-white transition-all duration-500 font-bold cursor-pointer
+         bg-gradient-to-r from-[#fef739] rounded-xl to-secondary h-10;
+    }
+    #comments{
+        @apply text-primary flex flex-col p-10 m-10 mx-auto max-w-md lg:max-w-3xl sm:max-w-2xl
+         rounded-md shadow-lg shadow-slate-300 space-y-2
+    }
+}

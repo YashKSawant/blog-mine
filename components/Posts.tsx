@@ -23,7 +23,7 @@ function Posts({ posts }: IPosts) {
                                 <img className='h-12 w-12 rounded-full border-4 border-[#FEB139]' src={urlFor(post.author.image).url()} alt="" />
                             </div>
                         </section>
-                        <p className='font-thin text-lg p-5 pt-0'>Posted at {new Date(post._createdAt).toLocaleString('en-GB', { day: 'numeric', month: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })}</p>
+                        <p className='font-thin text-lg p-5 pt-0'>Posted at {new Date(post.publishedAt).toLocaleString('en-GB', { day: 'numeric', month: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })}</p>
                     </div>
                 </Link>
             )
