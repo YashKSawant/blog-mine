@@ -92,7 +92,7 @@ function Post({ post }: IPost) {
                                                 <button className="text-gray-400 hover:text-blue-700 absolute top-12 right-2 transition-all duration-200 ease-in"><FaRegCopy size={18} /></button>
                                             </CopyToClipboard>
                                         </div>
-                                        <SyntaxHighlighter language={code.language || "text"} style={atomDark} className='hover:bg-opacity-10 rounded-md mt-0' >{code.code}</SyntaxHighlighter>
+                                        <SyntaxHighlighter language={code.language} style={atomDark} className='hover:bg-opacity-10 rounded-md mt-0' >{code.code}</SyntaxHighlighter>
                                     </div>,
                                 }
                             }
